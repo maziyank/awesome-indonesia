@@ -62,7 +62,8 @@ def tags_for(topics):
 def project_cell(item):
     repo_link = f"[{item['full_name']}]({item['url']})"
     description = item["description"].replace("|", "\\|")
-    return f"{repo_link}<br>{description}"
+    anchor = f'<a id="{project_anchor(item["full_name"])}"></a>'
+    return f"{anchor}{repo_link}<br>{description}"
 
 
 def project_anchor(full_name):
@@ -82,6 +83,7 @@ def build_readme(items):
         "Kumpulan proyek open source Indonesia yang aktif dan bisa langsung dijadikan referensi belajar, integrasi, atau kontribusi.",
         "",
         "## Daftar Isi",
+        "",
         "- [Tentang Daftar](#tentang-daftar)",
         "- [Urutan & Sumber Data](#urutan--sumber-data)",
         "- [Indeks Proyek](#indeks-proyek)",
@@ -90,9 +92,11 @@ def build_readme(items):
         "- [Lisensi](#lisensi)",
         "",
         "## Tentang Daftar",
+        "",
         "Awesome List ini berisi koleksi proyek open source Indonesia yang dapat diakses publik dan tetap dirawat oleh komunitas.",
         "",
         "## Urutan & Sumber Data",
+        "",
         "Urutan proyek berdasarkan jumlah **GitHub stars** (descending).",
         f"Data terakhir disinkronkan: **{date.today().isoformat()}**.",
         "",
@@ -108,7 +112,6 @@ def build_readme(items):
 
     for index, item in enumerate(items, 1):
         owner = f"[@{item['owner']}](https://github.com/{item['owner']})"
-        rows.append(f'<a id="{project_anchor(item["full_name"])}"></a>')
         rows.append(
             f"| {index} | {project_cell(item)} | {owner} | {item['language']} | "
             f"{item['stars']} | {item['forks']} | {item['open_issues']} | {item['license']} | "
@@ -119,11 +122,12 @@ def build_readme(items):
         [
             "",
             "## Cara Berkontribusi",
+            "",
             "Lihat [CONTRIBUTING.md](CONTRIBUTING.md).",
             "",
             "## Lisensi",
-            "Dokumen dan struktur daftar ini menggunakan MIT License, sedangkan tiap proyek tetap mengikuti lisensi asli masing-masing repositori.",
             "",
+            "Dokumen dan struktur daftar ini menggunakan MIT License, sedangkan tiap proyek tetap mengikuti lisensi asli masing-masing repositori.",
         ]
     )
     return "\n".join(rows)
