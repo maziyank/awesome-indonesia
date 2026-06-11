@@ -65,6 +65,10 @@ def project_cell(item):
     return f"{repo_link}<br>{description}"
 
 
+def project_anchor(full_name):
+    return full_name.lower().replace("/", "").replace(".", "").replace("_", "").replace(" ", "-")
+
+
 def build_readme(items):
     rows = [
         "# Awesome Indonesia",
@@ -80,6 +84,7 @@ def build_readme(items):
         "## Daftar Isi",
         "- [Tentang Daftar](#tentang-daftar)",
         "- [Urutan & Sumber Data](#urutan--sumber-data)",
+        "- [Indeks Proyek](#indeks-proyek)",
         "- [Daftar Proyek](#daftar-proyek)",
         "- [Cara Berkontribusi](#cara-berkontribusi)",
         "- [Lisensi](#lisensi)",
@@ -91,6 +96,10 @@ def build_readme(items):
         "Urutan proyek berdasarkan jumlah **GitHub stars** (descending).",
         f"Data terakhir disinkronkan: **{date.today().isoformat()}**.",
         "",
+        "## Indeks Proyek",
+        "",
+        *[f"- [{item['full_name']}](#{project_anchor(item['full_name'])})" for item in items],
+        "",
         "## Daftar Proyek",
         "",
         "| No | Project | Pembuat | Bahasa | Stars | Forks | Issue | Lisensi | Terakhir Update | Tags |",
@@ -99,6 +108,7 @@ def build_readme(items):
 
     for index, item in enumerate(items, 1):
         owner = f"[@{item['owner']}](https://github.com/{item['owner']})"
+        rows.append(f'<a id="{project_anchor(item["full_name"])}"></a>')
         rows.append(
             f"| {index} | {project_cell(item)} | {owner} | {item['language']} | "
             f"{item['stars']} | {item['forks']} | {item['open_issues']} | {item['license']} | "
