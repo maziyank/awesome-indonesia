@@ -8,6 +8,7 @@ Repo ini mengikuti gaya Awesome List.
 - Sertakan deskripsi resmi yang jelas dan singkat.
 - Cantumkan pembuat (owner), bahasa utama, dan tags/topik.
 - Urutkan ulang berdasarkan jumlah stars (dari terbesar).
+- Untuk menambah atau menghapus proyek, edit `repos.json`, lalu jalankan `python scripts/update-readme.py`.
 
 ## Format baris
 
@@ -21,4 +22,4 @@ Repo ini mengikuti gaya Awesome List.
 
 - Gunakan nama owner dan URL yang valid.
 - Jika topik terlalu panjang, cukup tampilkan beberapa tag kunci.
-
+- Jangan edit tabel README secara manual jika metadata bisa dihasilkan dari GitHub API.
